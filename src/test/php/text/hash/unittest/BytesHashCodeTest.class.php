@@ -53,24 +53,4 @@ class BytesHashCodeTest extends TestCase {
   public function hashcode_is_hex() {
     $this->assertEquals('7f0242ff', (new BytesHashCode("\177\2\102\377"))->hashCode());
   }
-
-  #[@test]
-  public function two_instances_with_same_hash_values_are_equal() {
-    $this->assertEquals(new BytesHashCode("\0\0\0\0"), new BytesHashCode("\0\0\0\0"));
-  }
-
-  #[@test]
-  public function two_instances_with_different_hash_values_are_not_equal() {
-    $this->assertNotEquals(new BytesHashCode("\0\0\0\0"), new BytesHashCode("\0\0\0\1"));
-  }
-
-  #[@test]
-  public function equality_using_equals() {
-    $this->assertTrue(((new BytesHashCode("\0\0\0\0"))->equals(new BytesHashCode("\0\0\0\0"))));
-  }
-
-  #[@test]
-  public function inequality_using_equals() {
-    $this->assertFalse(((new BytesHashCode("\0\0\0\0"))->equals(new BytesHashCode("\0\0\0\1"))));
-  }
 }

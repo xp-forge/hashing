@@ -2,6 +2,11 @@
 
 use lang\Value;
 
+/**
+ * Base class
+ *
+ * @test  xp://text.hash.unittest.HashCodeTest
+ */
 abstract class HashCode implements Value {
 
   /**
