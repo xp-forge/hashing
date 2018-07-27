@@ -23,9 +23,12 @@ class HashCodeTest extends TestCase {
     $this->assertFalse(HashCode::fromHex('7f0242ff')->equals(new IntHashCode(0)));
   }
 
-  #[@test]
-  public function two_instances_with_same_hash_values_are_equal() {
-    $this->assertEquals(new IntHashCode(0), new IntHashCode(0));
+  #[@test, @values([
+  #  [new IntHashCode(6100), new IntHashCode(6100)],
+  #  [new BytesHashCode("\0\377\1\6"), new BytesHashCode("\0\377\1\6")],
+  #])]
+  public function two_instances_with_same_hash_values_are_equal($a, $b) {
+    $this->assertEquals($a, $b);
   }
 
   #[@test]
