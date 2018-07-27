@@ -19,7 +19,7 @@ Calculate hash for a string:
 ```php
 use text\hash\Hashing;
 
-$hash= Hashing::murmur3_32();
+$hash= Hashing::murmur3_32()->new();
 $digest= $hash->digest('The quick brown fox jumps over the lazy dog.')->hex();
 ```
 
@@ -28,10 +28,11 @@ Incrementally updating hash:
 ```php
 use text\hash\Hashing;
 
-$hash= Hashing::md5();
+$hash= Hashing::md5()->new();
 while ($stream->available()) {
   $hash->update($stream->read());
 }
+
 $digest= $hash->digest()->hex();
 ```
 

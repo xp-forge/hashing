@@ -1,0 +1,8 @@
+<?php namespace text\hash;
+
+module xp-forge/hashing {
+  
+  public function initialize() {
+    class_alias(PHP_VERSION < 7 ? AlgorithmV5::class : AlgorithmV7::class, Algorithm::class);
+  }
+}
