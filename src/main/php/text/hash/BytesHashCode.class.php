@@ -2,7 +2,7 @@
 
 use util\Bytes;
 
-class BytesHashCode implements HashCode {
+class BytesHashCode extends HashCode {
   private $bytes;
 
   /** @param int $bytes */
@@ -25,4 +25,7 @@ class BytesHashCode implements HashCode {
 
   /** @return util.Bytes */
   public function bytes() { return new Bytes($this->bytes); }
+
+  /** @return string */
+  public function string() { return base_convert(bin2hex($this->bytes), 16, 32); }
 }

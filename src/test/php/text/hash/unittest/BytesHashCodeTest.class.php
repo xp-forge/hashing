@@ -16,6 +16,11 @@ class BytesHashCodeTest extends TestCase {
     $this->assertEquals(new Bytes("\0\0\0\0"), (new BytesHashCode("\0\0\0\0"))->bytes());
   }
 
+  #[@test]
+  public function as_string() {
+    $this->assertEquals('cnd0ue', (new BytesHashCode("\031\166\203\316"))->string());
+  }
+
   #[@test, @values([
   #  ["\0\0\0\0", 0],
   #  ["\0\0\0\1", 1],

@@ -14,16 +14,16 @@ Fluent interface to hashing functions provided by PHP, extended with Murmur3.
 Examples
 --------
 
-Calculate hash for a string:
+Calculate hash for a string, output using base32:
 
 ```php
 use text\hash\Hashing;
 
 $hash= Hashing::murmur3_32()->new($seed= 0x2a);
-$digest= $hash->digest('The quick brown fox jumps over the lazy dog.')->hex();
+$base32= $hash->digest('The quick brown fox jumps over the lazy dog.')->string();
 ```
 
-Incrementally updating hash:
+Incrementally updating hash, output hex (much like the builtin `md5()` function does):
 
 ```php
 use text\hash\Hashing;
@@ -33,7 +33,7 @@ while ($stream->available()) {
   $hash->update($stream->read());
 }
 
-$digest= $hash->digest()->hex();
+$hex= $hash->digest()->hex();
 ```
 
 Algorithms
