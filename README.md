@@ -11,12 +11,22 @@ Hashing
 
 Fluent interface to hashing functions provided by PHP, extended with Murmur3.
 
+Example
+-------
+
 ```php
-$hash= Hashing::murmur3_32()
-  ->update('The quick brown fox jumps')
-  ->update(' ')
-  ->update('over the lazy dog.')
-  ->digest()
-  ->hex()
-;
+$hash= Hashing::murmur3_32();
+$digest= $hash->update('The quick brown fox jumps over the lazy dog.')->digest()->hex();
 ```
+
+Algorithms
+----------
+The following algorithms exist as shortcuts inside the entry point class:
+
+* `Hashing::md5()`
+* `Hashing::sha1()`
+* `Hashing::sha256()`
+* `Hashing::sha512()`
+* `Hashing::murmur3_32(int $seed= 0)`
+
+Other algorithms can be instantiated via `Hashing::algorithm(string $name, var... $args)`, which may raise an *IllegalArgumentException* if the given algorithm is not available.
