@@ -84,9 +84,14 @@ class Murmur32 implements Hash {
   /**
    * Returns the final hash digest
    *
+   * @param  string $string Optional string value
    * @return text.hash.HashCode
    */
-  public function digest() {
+  public function digest($string= null) {
+    if (null !== $string) {
+      $this->update($string);
+    }
+
     $h= $this->hash;
     $k= 0;
     switch (sizeof($this->values)) {

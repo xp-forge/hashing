@@ -33,9 +33,13 @@ class Native implements Hash {
   /**
    * Returns the final hash digest
    *
+   * @param  string $string Optional string value
    * @return text.hash.HashCode
    */
-  public function digest() {
+  public function digest($string= null) {
+    if (null !== $string) {
+      hash_update($this->hash, $string);
+    }
     return new BytesHashCode(hash_final($this->hash, true));
   }
 }

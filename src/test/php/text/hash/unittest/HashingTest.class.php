@@ -63,4 +63,12 @@ class HashingTest extends TestCase {
   public function algorithms() {
     $this->assertInstanceOf('string[]', Hashing::algorithms());
   }
+
+  #[@test]
+  public function md5_digest() {
+    $this->assertEquals(
+      Hashing::md5()->update('Test')->digest(),
+      Hashing::md5()->digest('Test')
+    );
+  }
 }

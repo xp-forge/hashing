@@ -13,8 +13,9 @@ interface Hash {
   /**
    * Returns the final hash digest
    *
+   * @param  string $string Optional string value
    * @return text.hash.HashCode
    */
-  public function digest();
+  public function digest($string= null);
 
 }

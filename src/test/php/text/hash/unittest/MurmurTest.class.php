@@ -58,4 +58,12 @@ class MurmurTest extends TestCase {
 
     $this->assertEquals(0x7ec7c6c2, $hash->digest()->int());
   }
+
+  #[@test]
+  public function hash32_digest() {
+    $this->assertEquals(
+      (new Murmur32(42))->update('Test')->digest(),
+      (new Murmur32(42))->digest('Test')
+    );
+  }
 }

@@ -11,12 +11,28 @@ Hashing
 
 Fluent interface to hashing functions provided by PHP, extended with Murmur3.
 
-Example
--------
+Examples
+--------
+
+Calculate hash for a string:
 
 ```php
+use text\hash\Hashing;
+
 $hash= Hashing::murmur3_32();
-$digest= $hash->update('The quick brown fox jumps over the lazy dog.')->digest()->hex();
+$digest= $hash->digest('The quick brown fox jumps over the lazy dog.')->hex();
+```
+
+Incrementally updating hash:
+
+```php
+use text\hash\Hashing;
+
+$hash= Hashing::md5();
+while ($stream->available()) {
+  $hash->update($stream->read());
+}
+$digest= $hash->digest()->hex();
 ```
 
 Algorithms

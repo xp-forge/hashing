@@ -61,5 +61,4 @@ abstract class Hashing {
       default: return new Native($algorithm);
     }
   }
-
 }
