@@ -45,6 +45,16 @@ class IntHashCodeTest extends TestCase {
   }
 
   #[@test]
+  public function string_representation() {
+    $this->assertEquals('text.hash.IntHashCode(7f0242ff)', (new IntHashCode(2130854655))->toString());
+  }
+
+  #[@test]
+  public function hashcode_is_hex() {
+    $this->assertEquals('7f0242ff', (new IntHashCode(2130854655))->hashCode());
+  }
+
+  #[@test]
   public function two_instances_with_same_hash_values_are_equal() {
     $this->assertEquals(new IntHashCode(0), new IntHashCode(0));
   }
@@ -52,5 +62,15 @@ class IntHashCodeTest extends TestCase {
   #[@test]
   public function two_instances_with_different_hash_values_are_not_equal() {
     $this->assertNotEquals(new IntHashCode(0), new IntHashCode(1));
+  }
+
+  #[@test]
+  public function equality_using_equals() {
+    $this->assertTrue(((new IntHashCode(0))->equals(new IntHashCode(0))));
+  }
+
+  #[@test]
+  public function inequality_using_equals() {
+    $this->assertFalse(((new IntHashCode(0))->equals(new IntHashCode(1))));
   }
 }

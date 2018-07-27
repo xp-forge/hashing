@@ -31,4 +31,15 @@ abstract class HashCode implements Value {
   public function compareTo($value) {
     return $value instanceof self ? strcmp($this->hex(), $value->hex()) : 1;
   }
+
+  /**
+   * Check for equality to another HashCode. Uses constant time comparison
+   *
+   * @see    php://hash_equals
+   * @param  text.hash.HashCode $value
+   * @return bool
+   */
+  public function equals(self $value) {
+    return hash_equals($this->hex(), $value->hex());
+  }
 }
