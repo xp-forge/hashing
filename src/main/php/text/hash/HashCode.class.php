@@ -4,6 +4,14 @@ use lang\Value;
 
 abstract class HashCode implements Value {
 
+  /**
+   * Returns a HashCode instance from a hex string
+   *
+   * @param  string $hex
+   * @return self
+   */
+  public static function fromHex($hex) { return new BytesHashCode(hex2bin($hex)); }
+
   /** @return int */
   public abstract function int();
 

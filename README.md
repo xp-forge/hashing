@@ -36,6 +36,19 @@ while ($stream->available()) {
 $hex= $hash->digest()->hex();
 ```
 
+Comparing hashes using constant time comparison:
+
+```php
+use text\hash\{Hashing, HashCode};
+
+$computed= Hashing::sha256()->new()->digest('password');
+$stored= HashCode::fromHex($record['password']);
+
+if ($computed->equals($stored)) {
+  // Not susceptible to timing attacks
+}
+```
+
 Algorithms
 ----------
 The following algorithms exist as shortcuts inside the entry point class:
