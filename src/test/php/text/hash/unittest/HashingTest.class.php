@@ -47,6 +47,14 @@ class HashingTest extends TestCase {
   }
 
   #[@test, @values(map= [
+  #  ''     => 'f02aa77dfa1b8523d1016610da11cbb9',
+  #  'Test' => 'bc09c55042aa9b3a2ea395f564dfe810',
+  #])]
+  public function murmur3_128($value, $expected) {
+    $this->assertEquals($expected, Hashing::murmur3_128()->new(0x2a)->digest($value)->hex());
+  }
+
+  #[@test, @values(map= [
   #  ''    => '00000000',
   # 'Test' => '784dd132',
   #])]
