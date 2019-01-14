@@ -49,10 +49,14 @@ abstract class HashCode implements Value {
    * Check for equality to another HashCode. Uses constant time comparison
    *
    * @see    php://hash_equals
-   * @param  text.hash.HashCode $value
+   * @param  string|text.hash.HashCode $value
    * @return bool
    */
-  public function equals(self $value) {
-    return hash_equals($this->hex(), $value->hex());
+  public function equals($value) {
+    if ($value instanceof self) {
+      return hash_equals($this->hex(), $value->hex());
+    } else {
+      return hash_equals($this->hex(), (string)$value);
+    }
   }
 }

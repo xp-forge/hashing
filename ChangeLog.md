@@ -5,6 +5,7 @@ Hashing change log
 
 ## 0.2.0 / 2019-01-14
 
+* Overloaded HashCode::equals() to also accept hex strings - @thekid
 * Merged PR #2: Add digest() shortcut to Algorithm - @thekid
 
 ## 0.1.0 / 2018-08-12

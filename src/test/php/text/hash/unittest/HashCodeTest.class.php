@@ -23,6 +23,16 @@ class HashCodeTest extends TestCase {
     $this->assertFalse(HashCode::fromHex('7f0242ff')->equals(new IntHashCode(0)));
   }
 
+  #[@test]
+  public function equality_with_string() {
+    $this->assertTrue(HashCode::fromHex('7f0242ff')->equals('7f0242ff'));
+  }
+
+  #[@test]
+  public function inequality_with_string() {
+    $this->assertFalse(HashCode::fromHex('7f0242ff')->equals(''));
+  }
+
   #[@test, @values([
   #  [new IntHashCode(6100), new IntHashCode(6100)],
   #  [new BytesHashCode("\0\377\1\6"), new BytesHashCode("\0\377\1\6")],
