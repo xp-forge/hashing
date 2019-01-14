@@ -27,7 +27,7 @@ abstract class HashCode implements Value {
   public abstract function bytes();
 
   /** @return string */
-  public abstract function string();
+  public abstract function base32();
 
   /** @return string */
   public function toString() { return nameof($this).'('.$this->hex().')'; }

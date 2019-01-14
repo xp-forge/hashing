@@ -20,7 +20,7 @@ Calculate hash for a string, output using base32:
 use text\hash\Hashing;
 
 $hash= Hashing::murmur3_32()->new($seed= 0x2a);
-$base32= $hash->digest('The quick brown fox jumps over the lazy dog.')->string();
+$base32= $hash->digest('The quick brown fox jumps over the lazy dog.')->base32();
 ```
 
 Incrementally updating hash, output hex (much like the builtin `md5()` function does):

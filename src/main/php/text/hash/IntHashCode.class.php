@@ -26,5 +26,5 @@ class IntHashCode extends HashCode {
   public function bytes() { return new Bytes(pack('N', $this->int)); }
 
   /** @return string */
-  public function string() { return base_convert($this->int, 10, 32); }
+  public function base32() { return base_convert($this->int, 10, 32); }
 }
