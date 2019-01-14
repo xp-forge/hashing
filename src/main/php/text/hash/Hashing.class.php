@@ -74,6 +74,7 @@ abstract class Hashing {
   public static function algorithm($algorithm, ... $args) {
     switch ($algorithm) {
       case 'murmur3_32': return new Algorithm(function(... $args) { return new Murmur32(...$args); });
+      case 'murmur3_128': return new Algorithm(function(... $args) { return new Murmur128(...$args); });
       default: return new Algorithm(function(... $args) use($algorithm) { return new Native($algorithm); });
     }
   }
