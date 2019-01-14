@@ -5,6 +5,7 @@ Hashing change log
 
 ## 0.2.0 / 2019-01-14
 
+* Made HashCode instances castable to string - @thekid
 * **Heads up:** Renamed HashCode's string method to `base32` - @thekid
 * Overloaded HashCode::equals() to also accept hex strings - @thekid
 * Merged PR #2: Add digest() shortcut to Algorithm - @thekid

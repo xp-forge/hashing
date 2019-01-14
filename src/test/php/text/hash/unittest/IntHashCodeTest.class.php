@@ -21,6 +21,11 @@ class IntHashCodeTest extends TestCase {
     $this->assertEquals('cnd0ue', (new IntHashCode(427197390))->base32());
   }
 
+  #[@test]
+  public function string_cast() {
+    $this->assertEquals('197683ce', (string)new IntHashCode(427197390));
+  }
+
   #[@test, @values([
   #  [0, '00000000'],
   #  [1, '00000001'],
