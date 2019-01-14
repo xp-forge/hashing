@@ -79,4 +79,12 @@ class HashingTest extends TestCase {
       Hashing::md5()->new()->digest('Test')
     );
   }
+
+  #[@test]
+  public function digest_shortcut() {
+    $this->assertEquals(
+      Hashing::md5()->digest('Test'),
+      Hashing::md5()->new()->digest('Test')
+    );
+  }
 }
