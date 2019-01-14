@@ -9,6 +9,17 @@ class AlgorithmV5 {
   }
 
   /**
+   * Shortcut for `new()->digest()`.
+   *
+   * @param  string $string
+   * @param  var... $args
+   * @return text.hash.HashCode
+   */
+  public function digest($string, ... $args) {
+    return $this->f['new'](...$args)->digest($string);
+  }
+
+  /**
    * Instantiates the algorithm (call interceptot for `$algo->new()`).
    *
    * @param  string $name

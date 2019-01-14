@@ -9,6 +9,17 @@ class AlgorithmV7 {
   }
 
   /**
+   * Shortcut for `new()->digest()`.
+   *
+   * @param  string $string
+   * @param  var... $args
+   * @return text.hash.HashCode
+   */
+  public function digest($string, ... $args) {
+    return ($this->new)(...$args)->digest($string);
+  }
+
+  /**
    * Instantiates the algorithm
    *
    * @param  var... $args
