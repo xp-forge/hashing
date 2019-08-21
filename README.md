@@ -40,8 +40,8 @@ Comparing hashes using constant time comparison:
 ```php
 use text\hash\{Hashing, HashCode};
 
-$computed= Hashing::sha256()->new()->digest('password');
-$stored= HashCode::fromHex($record['password']);
+$computed= Hashing::sha256()->digest($req->param('password')); // From request
+$stored= HashCode::fromHex($record['password']);               // From database
 
 if ($computed->equals($stored)) {
   // Not susceptible to timing attacks
