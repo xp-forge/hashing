@@ -59,4 +59,4 @@ The following algorithms exist as shortcuts inside the entry point class:
 * `Hashing::murmur3_32()`
 * `Hashing::murmur3_128()`
 
-Other algorithms can be instantiated via `Hashing::algorithm(string $name, var... $args)`, which may raise an *IllegalArgumentException* if the given algorithm is not available.
+[Other algorithms](https://www.php.net/manual/en/function.hash-algos.php) can be instantiated via `Hashing::algorithm(string $name, var... $args)`, which may raise an *IllegalArgumentException* if the given algorithm is not available.
