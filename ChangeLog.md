@@ -3,6 +3,8 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+* Fixed compatibility with PHP 7.4 - @thekid
+
 ## 0.2.0 / 2019-01-14
 
 * Made HashCode instances castable to string - @thekid
