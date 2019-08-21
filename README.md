@@ -41,7 +41,7 @@ Comparing hashes using constant time comparison:
 use text\hash\{Hashing, HashCode};
 
 $computed= Hashing::sha256()->digest($req->param('password')); // From request
-$stored= HashCode::fromHex($record['password']);               // From database
+$stored= HashCode::fromHex($record['password_hash']);          // From database
 
 if ($computed->equals($stored)) {
   // Not susceptible to timing attacks
