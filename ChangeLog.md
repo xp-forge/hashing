@@ -3,6 +3,12 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+## 1.0.0 / 2019-08-21
+
+* Ensured hashes cannot be reused after `digest()` has been called,
+  preventing *supplied resource is not a valid Hash Context resource*
+  warnings for the native implementation and unpredictable results.
+  (@thekid)
 * Fixed compatibility with PHP 7.4 - @thekid
 
 ## 0.2.0 / 2019-01-14

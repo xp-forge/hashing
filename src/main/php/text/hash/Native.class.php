@@ -1,6 +1,7 @@
 <?php namespace text\hash;
 
 use lang\IllegalArgumentException;
+use lang\IllegalStateException;
 
 class Native implements Hash {
 
@@ -24,8 +25,12 @@ class Native implements Hash {
    *
    * @param  string $string
    * @return self
+   * @throws lang.IllegalStateException
    */
   public function update($string) {
+    if (null === $this->hash) {
+      throw new IllegalStateException('Cannot reuse hash');
+    }
     hash_update($this->hash, $string);
     return $this;
   }
@@ -35,11 +40,21 @@ class Native implements Hash {
    *
    * @param  string $string Optional string value
    * @return text.hash.HashCode
+   * @throws lang.IllegalStateException
    */
   public function digest($string= null) {
+    if (null === $this->hash) {
+      throw new IllegalStateException('Cannot reuse hash');
+    }
+
     if (null !== $string) {
       hash_update($this->hash, $string);
     }
-    return new BytesHashCode(hash_final($this->hash, true));
+
+    try {
+      return new BytesHashCode(hash_final($this->hash, true));
+    } finally {
+      $this->hash= null;
+    }
   }
 }
