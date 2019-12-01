@@ -1,6 +1,7 @@
 <?php namespace text\hash\unittest;
 
 use lang\IllegalArgumentException;
+use lang\IllegalStateException;
 use text\hash\Hashing;
 use unittest\TestCase;
 
@@ -86,5 +87,13 @@ class HashingTest extends TestCase {
       Hashing::md5()->digest('Test'),
       Hashing::md5()->new()->digest('Test')
     );
+  }
+
+  #[@test, @values(['md5', 'murmur3_32', 'murmur3_128']), @expect(IllegalStateException::class)]
+  public function cannot_be_reused_after_digest_called($algorithm) {
+    $fixture= Hashing::algorithm($algorithm)->new(); 
+
+    $fixture->digest('Test');
+    $fixture->digest('Test');
   }
 }

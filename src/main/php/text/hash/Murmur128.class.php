@@ -1,11 +1,14 @@
 <?php namespace text\hash;
 
+use lang\IllegalStateException;
+
 class Murmur128 implements Hash {
   const C1 = '9782798678568883157';
   const C2 = '5545529020109919103';
   const FF = "\xff\xff\xff\xff\xff\xff\xff\xff";
 
   private $hash, $values, $length;
+  private $final= false;
 
   /**
    * Creates a new Murmur32 hash instance
@@ -137,8 +140,12 @@ class Murmur128 implements Hash {
    *
    * @param  string $string
    * @return self
+   * @throws lang.IllegalStateException
    */
   public function update($string) {
+    if ($this->final) {
+      throw new IllegalStateException('Cannot reuse hash');
+    }
 
     // Merge remainder with new byte values
     list($h1, $h2)= $this->hash;
@@ -181,8 +188,13 @@ class Murmur128 implements Hash {
    *
    * @param  string $string Optional string value
    * @return text.hash.HashCode
+   * @throws lang.IllegalStateException
    */
   public function digest($string= null) {
+    if ($this->final) {
+      throw new IllegalStateException('Cannot reuse hash');
+    }
+
     if (null !== $string) {
       $this->update($string);
     }
@@ -231,6 +243,7 @@ class Murmur128 implements Hash {
     $a= self::bytes($h1);
     $b= self::bytes($h2);
 
+    $this->final= true;
     return new BytesHashCode(strrev(
       str_pad(substr($b, 0, 8), 8, "\0", STR_PAD_RIGHT).
       str_pad(substr($a, 0, 8), 8, "\0", STR_PAD_RIGHT)

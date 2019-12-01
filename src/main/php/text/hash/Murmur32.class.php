@@ -1,5 +1,7 @@
 <?php namespace text\hash;
 
+use lang\IllegalStateException;
+
 /**
  * MurmurHash3, 32-bit
  *
@@ -11,6 +13,7 @@ class Murmur32 implements Hash {
   const C2 = 0x1b873593;
 
   private $hash, $values, $length;
+  private $final= false;
 
   /**
    * Creates a new Murmur32 hash instance
@@ -51,8 +54,12 @@ class Murmur32 implements Hash {
    *
    * @param  string $string
    * @return self
+   * @throws lang.IllegalStateException
    */
   public function update($string) {
+    if ($this->final) {
+      throw new IllegalStateException('Cannot reuse hash');
+    }
 
     // Merge remainder with new byte values
     $h= $this->hash;
@@ -86,8 +93,13 @@ class Murmur32 implements Hash {
    *
    * @param  string $string Optional string value
    * @return text.hash.HashCode
+   * @throws lang.IllegalStateException
    */
   public function digest($string= null) {
+    if ($this->final) {
+      throw new IllegalStateException('Cannot reuse hash');
+    }
+
     if (null !== $string) {
       $this->update($string);
     }
@@ -112,6 +124,7 @@ class Murmur32 implements Hash {
     $h = self::mul32($h, 0xc2b2ae35);
     $h ^= ($h >> 16) & 0xffffffff;
 
+    $this->final= true;
     return new IntHashCode($h);
   }
 }
