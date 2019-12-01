@@ -47,7 +47,7 @@ class Murmur128 implements Hash {
     for ($i= $len - 1; $i >= 0; $i-= 4) {
       $r= bcadd(
         bcmul($r, '4294967296'),
-        0x1000000 * ord($bytes{$i}) + current(unpack('V', substr($bytes, $i - 3, 3)."\0"))
+        0x1000000 * ord($bytes[$i]) + current(unpack('V', substr($bytes, $i - 3, 3)."\0"))
       );
     }      
     return $r;
@@ -190,26 +190,26 @@ class Murmur128 implements Hash {
     list($h1, $h2)= $this->hash;
     $k1= $k2= 0;
     switch (strlen($this->values)) {
-      case 15: $k2 ^= ord($this->values{14}) << 48;
-      case 14: $k2 ^= ord($this->values{13}) << 40;
-      case 13: $k2 ^= ord($this->values{12}) << 32;
-      case 12: $k2 ^= ord($this->values{11}) << 24;
-      case 11: $k2 ^= ord($this->values{10}) << 16;
-      case 10: $k2 ^= ord($this->values{9}) << 8;
-      case 9: $k2 ^= ord($this->values{8});
+      case 15: $k2 ^= ord($this->values[14]) << 48;
+      case 14: $k2 ^= ord($this->values[13]) << 40;
+      case 13: $k2 ^= ord($this->values[12]) << 32;
+      case 12: $k2 ^= ord($this->values[11]) << 24;
+      case 11: $k2 ^= ord($this->values[10]) << 16;
+      case 10: $k2 ^= ord($this->values[9]) << 8;
+      case 9: $k2 ^= ord($this->values[8]);
         $k2= self::mul($k2, self::C2);
         $k2= self::rotl64($k2, 33);
         $k2= self::mul($k2, self::C1);
         $h2= self::xor64($h2, $k2);
 
-      case 8: $k1 ^= ord($this->values{7}) << 56;
-      case 7: $k1 ^= ord($this->values{6}) << 48;
-      case 6: $k1 ^= ord($this->values{5}) << 40;
-      case 5: $k1 ^= ord($this->values{4}) << 32;
-      case 4: $k1 ^= ord($this->values{3}) << 24;
-      case 3: $k1 ^= ord($this->values{2}) << 16;
-      case 2: $k1 ^= ord($this->values{1}) << 8;
-      case 1: $k1 ^= ord($this->values{0});
+      case 8: $k1 ^= ord($this->values[7]) << 56;
+      case 7: $k1 ^= ord($this->values[6]) << 48;
+      case 6: $k1 ^= ord($this->values[5]) << 40;
+      case 5: $k1 ^= ord($this->values[4]) << 32;
+      case 4: $k1 ^= ord($this->values[3]) << 24;
+      case 3: $k1 ^= ord($this->values[2]) << 16;
+      case 2: $k1 ^= ord($this->values[1]) << 8;
+      case 1: $k1 ^= ord($this->values[0]);
         $k1= self::mul($k1, self::C1);
         $k1= self::rotl64($k1, 31);
         $k1= self::mul($k1, self::C2);
