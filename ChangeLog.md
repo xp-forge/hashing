@@ -9,6 +9,10 @@ Hashing change log
   PHP version is now 7.0.0!
   (@thekid)
 
+## 1.0.1 / 2019-12-01
+
+* Made compatible with XP 10 - @thekid
+
 ## 1.0.0 / 2019-08-21
 
 * Ensured hashes cannot be reused after `digest()` has been called,
