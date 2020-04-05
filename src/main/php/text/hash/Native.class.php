@@ -13,10 +13,14 @@ class Native implements Hash {
    * @throws lang.IllegalArgumentException
    */
   public function __construct($algorithm) {
-    if (!($this->hash= hash_init($algorithm))) {
-      $e= new IllegalArgumentException('No such algorithm "'.$algorithm.'"');
-      \xp::gc(__FILE__);
-      throw $e;
+    try {
+      if (!($this->hash= hash_init($algorithm))) {
+        $e= new IllegalArgumentException('No such algorithm "'.$algorithm.'"');
+        \xp::gc(__FILE__);
+        throw $e;
+      }
+    } catch (\Error $e) {
+      throw new IllegalArgumentException('No such algorithm "'.$algorithm.'"', $e);
     }
   }
 
