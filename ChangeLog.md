@@ -3,6 +3,12 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+## 2.0.2 / 2020-10-04
+
+* Fixed "Array and string offset access syntax with curly braces is no
+  longer supported" warnings
+  (@thekid)
+
 ## 2.0.1 / 2020-04-05
 
 * Implemented RFC #335: Remove deprecated key/value pair annotation syntax
