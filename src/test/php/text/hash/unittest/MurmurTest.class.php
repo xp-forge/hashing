@@ -1,8 +1,7 @@
 <?php namespace text\hash\unittest;
 
-use text\hash\Murmur128;
-use text\hash\Murmur32;
-use unittest\TestCase;
+use text\hash\{Murmur128, Murmur32};
+use unittest\{Test, TestCase, Values};
 
 class MurmurTest extends TestCase {
 
@@ -32,17 +31,17 @@ class MurmurTest extends TestCase {
     yield [0x2a, 0xc02d1434, '74f33c659cda5af74ec7a891caf316f0', 'The quick brown fox jumps over the lazy dog.'];
   }
 
-  #[@test]
+  #[Test]
   public function can_create() {
     new Murmur32();
   }
 
-  #[@test]
+  #[Test]
   public function can_create_with_seed() {
     new Murmur32(0x2a);
   }
 
-  #[@test, @values('results')]
+  #[Test, Values('results')]
   public function hash32($seed, $digest32, $digest128, $bytes) {
     $hash= new Murmur32($seed);
     $hash->update($bytes);
@@ -50,7 +49,7 @@ class MurmurTest extends TestCase {
     $this->assertEquals($digest32, $hash->digest()->int());
   }
 
-  #[@test, @values('results')]
+  #[Test, Values('results')]
   public function hash128($seed, $digest32, $digest128, $bytes) {
     $hash= new Murmur128($seed);
     $hash->update($bytes);
@@ -58,7 +57,7 @@ class MurmurTest extends TestCase {
     $this->assertEquals($digest128, $hash->digest()->hex());
   }
 
-  #[@test]
+  #[Test]
   public function hash32_update() {
     $hash= new Murmur32(42);
     $hash->update('hello');
@@ -68,7 +67,7 @@ class MurmurTest extends TestCase {
     $this->assertEquals(0x7ec7c6c2, $hash->digest()->int());
   }
 
-  #[@test]
+  #[Test]
   public function hash32_digest() {
     $this->assertEquals(
       (new Murmur32(42))->update('Test')->digest(),
