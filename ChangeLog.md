@@ -3,6 +3,10 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+## 2.0.3 / 2020-10-21
+
+* Made library compatible with XP 11 - @thekid
+
 ## 2.0.2 / 2020-10-04
 
 * Fixed "Array and string offset access syntax with curly braces is no
