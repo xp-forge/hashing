@@ -4,6 +4,7 @@ use lang\IllegalArgumentException;
 use lang\IllegalStateException;
 
 class Native implements Hash {
+  private $hash;
 
   /**
    * Creates a new native hashing function

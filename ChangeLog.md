@@ -3,6 +3,10 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+## 2.0.4 / 2022-02-26
+
+* Fixed "Creation of dynamic property" warnings in PHP 8.2 - @thekid
+
 ## 2.0.3 / 2020-10-21
 
 * Made library compatible with XP 11 - @thekid
