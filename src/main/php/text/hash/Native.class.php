@@ -2,6 +2,7 @@
 
 use lang\IllegalArgumentException;
 use lang\IllegalStateException;
+use util\{Bytes, Secret};
 
 class Native implements Hash {
   private $hash;
@@ -28,32 +29,40 @@ class Native implements Hash {
   /**
    * Incrementally update the hash with a string.
    *
-   * @param  string $string
+   * @param  string|util.Bytes|util.Secret $arg
    * @return self
    * @throws lang.IllegalStateException
    */
-  public function update($string) {
+  public function update($arg) {
     if (null === $this->hash) {
       throw new IllegalStateException('Cannot reuse hash');
     }
-    hash_update($this->hash, $string);
+
+    if ($arg instanceof Secret) {
+      hash_update($this->hash, $arg->reveal());
+    } else if ($arg instanceof Bytes) {
+      hash_update($this->hash, (string)$arg);
+    } else {
+      hash_update($this->hash, $arg);
+    }
+
     return $this;
   }
 
   /**
    * Returns the final hash digest
    *
-   * @param  string $string Optional string value
+   * @param  ?string|util.Bytes|util.Secret $arg Optional string value
    * @return text.hash.HashCode
    * @throws lang.IllegalStateException
    */
-  public function digest($string= null) {
+  public function digest($arg= null) {
     if (null === $this->hash) {
       throw new IllegalStateException('Cannot reuse hash');
     }
 
-    if (null !== $string) {
-      hash_update($this->hash, $string);
+    if (null !== $arg) {
+      $this->update($arg);
     }
 
     try {
