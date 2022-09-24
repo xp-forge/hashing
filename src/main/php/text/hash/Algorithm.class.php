@@ -1,11 +1,11 @@
 <?php namespace text\hash;
 
-class AlgorithmV5 {
-  private $f;
+class Algorithm {
+  private $new;
 
   /** @param function(var...): text.hash.Hash $new */
   public function __construct($new) {
-    $this->f= ['new' => $new];
+    $this->new= $new;
   }
 
   /**
@@ -16,17 +16,16 @@ class AlgorithmV5 {
    * @return text.hash.HashCode
    */
   public function digest($string, ... $args) {
-    return $this->f['new'](...$args)->digest($string);
+    return ($this->new)(...$args)->digest($string);
   }
 
   /**
-   * Instantiates the algorithm (call interceptot for `$algo->new()`).
+   * Instantiates the algorithm
    *
-   * @param  string $name
-   * @param  var[] $args
+   * @param  var... $args
    * @return text.hash.Hash
    */
-  public function __call($name, $args) {
-    return $this->f[$name](...$args);
+  public function new(... $args) {
+    return ($this->new)(...$args);
   }
 }
