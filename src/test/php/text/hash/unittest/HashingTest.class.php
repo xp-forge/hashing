@@ -3,6 +3,7 @@
 use lang\{IllegalArgumentException, IllegalStateException};
 use text\hash\Hashing;
 use unittest\{Expect, Test, TestCase, Values};
+use util\{Secret, Bytes};
 
 class HashingTest extends TestCase {
 
@@ -73,5 +74,19 @@ class HashingTest extends TestCase {
 
     $fixture->digest('Test');
     $fixture->digest('Test');
+  }
+
+  #[Test, Values(['md5', 'murmur3_32', 'murmur3_128'])]
+  public function can_pass_secrets($algorithm) {
+    $fixture= Hashing::algorithm($algorithm);
+
+    $this->assertEquals($fixture->new()->digest('test'), $fixture->new()->digest(new Secret('test')));
+  }
+
+  #[Test, Values(['md5', 'murmur3_32', 'murmur3_128'])]
+  public function can_pass_bytes($algorithm) {
+    $fixture= Hashing::algorithm($algorithm);
+
+    $this->assertEquals($fixture->new()->digest('test'), $fixture->new()->digest(new Bytes('test')));
   }
 }

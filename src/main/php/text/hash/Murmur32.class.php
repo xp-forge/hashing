@@ -1,6 +1,7 @@
 <?php namespace text\hash;
 
 use lang\IllegalStateException;
+use util\{Bytes, Secret};
 
 /**
  * MurmurHash3, 32-bit
@@ -52,13 +53,21 @@ class Murmur32 implements Hash {
   /**
    * Incrementally update the hash with a string.
    *
-   * @param  string $string
+   * @param  string|util.Bytes|util.Secret $arg
    * @return self
    * @throws lang.IllegalStateException
    */
-  public function update($string) {
+  public function update($arg) {
     if ($this->final) {
       throw new IllegalStateException('Cannot reuse hash');
+    }
+
+    if ($arg instanceof Secret) {
+      $string= $arg->reveal();
+    } else if ($arg instanceof Bytes) {
+      $string= (string)$arg;
+    } else {
+      $string= &$arg;
     }
 
     // Merge remainder with new byte values
@@ -91,17 +100,17 @@ class Murmur32 implements Hash {
   /**
    * Returns the final hash digest
    *
-   * @param  string $string Optional string value
+   * @param  ?string|util.Bytes|util.Secret $arg Optional string value
    * @return text.hash.HashCode
    * @throws lang.IllegalStateException
    */
-  public function digest($string= null) {
+  public function digest($arg= null) {
     if ($this->final) {
       throw new IllegalStateException('Cannot reuse hash');
     }
 
-    if (null !== $string) {
-      $this->update($string);
+    if (null !== $arg) {
+      $this->update($arg);
     }
 
     $h= $this->hash;
