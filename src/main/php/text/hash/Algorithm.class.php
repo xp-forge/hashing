@@ -11,12 +11,12 @@ class Algorithm {
   /**
    * Shortcut for `new()->digest()`.
    *
-   * @param  string $string
+   * @param  string|util.Bytes|util.Secret $arg
    * @param  var... $args
    * @return text.hash.HashCode
    */
-  public function digest($string, ... $args) {
-    return ($this->new)(...$args)->digest($string);
+  public function digest($arg, ... $args) {
+    return ($this->new)(...$args)->digest($arg);
   }
 
   /**

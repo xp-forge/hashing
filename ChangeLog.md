@@ -3,6 +3,9 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+* Merged PR #3: Add support for passing `util.Bytes` and `util.Secret`
+  instances.
+  (@thekid)
 * Removed PHP 5 compatibility left-overs, resulting in a tiny performance
   increase due to removed conditionally loaded files.
   (@thekid)
