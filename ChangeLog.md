@@ -3,6 +3,8 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+## 2.1.0 / 2022-09-24
+
 * Use native `murmur3a` for *murmur3_32* algorithm as of PHP 8.1.0, see
   Changelog at https://www.php.net/manual/de/function.hash-algos.php
   (@thekid)
