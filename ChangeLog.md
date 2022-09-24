@@ -3,6 +3,9 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+* Use native `murmur3a` for *murmur3_32* algorithm as of PHP 8.1.0, see
+  Changelog at https://www.php.net/manual/de/function.hash-algos.php
+  (@thekid)
 * Merged PR #3: Add support for passing `util.Bytes` and `util.Secret`
   instances.
   (@thekid)

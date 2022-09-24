@@ -35,7 +35,12 @@ abstract class Hashing {
    *
    * @return text.hash.Algorithm
    */
-  public static function murmur3_32() { return new Algorithm(function(... $args) { return new Murmur32(...$args); }); }
+  public static function murmur3_32() {
+    return PHP_VERSION_ID >= 80100
+      ? new Algorithm(function(... $args) { return new Native('murmur3a'); })
+      : new Algorithm(function(... $args) { return new Murmur32(...$args); })
+    ;
+  }
 
   /**
    * Returns the `murmur3` 128-bit hash function (C++ equivalent: MurmurHash3_x64_128)
@@ -52,8 +57,8 @@ abstract class Hashing {
    */
   public static function algorithms() {
     $r= [
-      'murmur3_32' => new Algorithm(function(... $args) { return new Murmur32(...$args); }),
-      'murmur3_128' => new Algorithm(function(... $args) { return new Murmur128(...$args); })
+      'murmur3_32'  => self::murmur3_32(),
+      'murmur3_128' => self::murmur3_128(),
     ];
 
     // Add all algorithms natively built in to PHP
