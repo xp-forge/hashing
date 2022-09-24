@@ -3,6 +3,10 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+* Removed PHP 5 compatibility left-overs, resulting in a tiny performance
+  increase due to removed conditionally loaded files.
+  (@thekid)
+
 ## 2.0.4 / 2022-02-26
 
 * Fixed "Creation of dynamic property" warnings in PHP 8.2 - @thekid
