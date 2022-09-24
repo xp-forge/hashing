@@ -80,13 +80,13 @@ class HashingTest extends TestCase {
   public function can_pass_secrets($algorithm) {
     $fixture= Hashing::algorithm($algorithm);
 
-    $this->assertEquals($fixture->new()->digest('test'), $fixture->new()->digest(new Secret('test')));
+    $this->assertEquals($fixture->digest('test'), $fixture->digest(new Secret('test')));
   }
 
   #[Test, Values(['md5', 'murmur3_32', 'murmur3_128'])]
   public function can_pass_bytes($algorithm) {
     $fixture= Hashing::algorithm($algorithm);
 
-    $this->assertEquals($fixture->new()->digest('test'), $fixture->new()->digest(new Bytes('test')));
+    $this->assertEquals($fixture->digest('test'), $fixture->digest(new Bytes('test')));
   }
 }
