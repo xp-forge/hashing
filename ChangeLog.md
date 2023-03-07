@@ -3,6 +3,8 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+* Migrated PR #4: Migrate to new testing library - @thekid
+
 ## 2.1.0 / 2022-09-24
 
 * Use native `murmur3a` for *murmur3_32* algorithm as of PHP 8.1.0, see
