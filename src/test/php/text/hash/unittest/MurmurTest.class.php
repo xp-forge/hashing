@@ -1,9 +1,10 @@
 <?php namespace text\hash\unittest;
 
 use text\hash\{Murmur128, Murmur32};
-use unittest\{Test, TestCase, Values};
+use test\Assert;
+use test\{Test, TestCase, Values};
 
-class MurmurTest extends TestCase {
+class MurmurTest {
 
   /**
    * Expected results
@@ -41,20 +42,20 @@ class MurmurTest extends TestCase {
     new Murmur32(0x2a);
   }
 
-  #[Test, Values('results')]
+  #[Test, Values(from: 'results')]
   public function hash32($seed, $digest32, $digest128, $bytes) {
     $hash= new Murmur32($seed);
     $hash->update($bytes);
 
-    $this->assertEquals($digest32, $hash->digest()->int());
+    Assert::equals($digest32, $hash->digest()->int());
   }
 
-  #[Test, Values('results')]
+  #[Test, Values(from: 'results')]
   public function hash128($seed, $digest32, $digest128, $bytes) {
     $hash= new Murmur128($seed);
     $hash->update($bytes);
 
-    $this->assertEquals($digest128, $hash->digest()->hex());
+    Assert::equals($digest128, $hash->digest()->hex());
   }
 
   #[Test]
@@ -64,12 +65,12 @@ class MurmurTest extends TestCase {
     $hash->update(', ');
     $hash->update('world');
 
-    $this->assertEquals(0x7ec7c6c2, $hash->digest()->int());
+    Assert::equals(0x7ec7c6c2, $hash->digest()->int());
   }
 
   #[Test]
   public function hash32_digest() {
-    $this->assertEquals(
+    Assert::equals(
       (new Murmur32(42))->update('Test')->digest(),
       (new Murmur32(42))->digest('Test')
     );
