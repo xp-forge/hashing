@@ -3,6 +3,7 @@ Hashing change log
 
 ## ?.?.? / ????-??-??
 
+* Added PHP 8.4 to the test matrix - @thekid
 * Migrated PR #4: Migrate to new testing library - @thekid
 
 ## 2.1.0 / 2022-09-24
