@@ -14,11 +14,15 @@ class HashingInputStreamTest {
   }
 
   #[Test]
+  public function data_is_available_from_underlying_stream() {
+    $fixture= new HashingInputStream('sha256', new MemoryInputStream('Test'));
+    Assert::equals(4, $fixture->available());
+  }
+
+  #[Test]
   public function data_is_read_from_underlying_stream() {
     $fixture= new HashingInputStream('sha256', new MemoryInputStream('Test'));
-    $bytes= $fixture->read();
-
-    Assert::equals('Test', $bytes);
+    Assert::equals('Test', $fixture->read());
   }
 
   #[Test, Values(from: 'arguments')]
